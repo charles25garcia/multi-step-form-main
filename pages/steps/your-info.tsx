@@ -80,7 +80,7 @@ export default function YourInfo(): JSX.Element {
     const onPhoneNumberChange = (e: any) => {
         const inputValue = e.target.value;
 
-        setInvalidPhoneNumber(!isValidPhoneNumber(inputValue));
+        setInvalidPhoneNumber(isBlank(inputValue));
 
         setPersonalInfoData({
             ...personalInfoData,
@@ -97,7 +97,7 @@ export default function YourInfo(): JSX.Element {
 
             <div className="form-group">
                 <label htmlFor="exampleInputName">Name</label>
-                { invalidName ? <text className={YourInfoStyle.errorText}>Name is Required.</text>: <text></text>}
+                { invalidName ? <text className={YourInfoStyle.errorText}>This field is required</text>: <text></text>}
                 <input required onChange={onNameChange} onBlur={onNameChange} value={personalInfoData.name} type="text" placeholder="e.g. Stephen King" 
                 className={`form-control ${invalidName? YourInfoStyle.error :''}`} id="exampleInputName" aria-describedby="nameHelp"/>
             </div>
@@ -105,7 +105,7 @@ export default function YourInfo(): JSX.Element {
 
             <div className="form-group">
                 <label htmlFor="exampleInputEmail">Email Address</label>
-                { invalidEmail ? <text className={YourInfoStyle.errorText}>Invalid Email.</text>: <text></text>}
+                { invalidEmail ? <text className={YourInfoStyle.errorText}>Invalid Email</text>: <text></text>}
                 <input required onChange={onEmailChange} onBlur={onEmailChange} value={personalInfoData.email} type="email" placeholder="e.g. stephenking@lorem.com" 
                 className={`form-control ${invalidEmail? YourInfoStyle.error :''}`} id="exampleInputEmail" aria-describedby="emailHelp"/>
             </div>
@@ -114,7 +114,7 @@ export default function YourInfo(): JSX.Element {
 
             <div className="form-group">
                 <label htmlFor="exampleInputPhoneNumber">Phone Number</label>
-                { invalidPhoneNumber ? <text className={YourInfoStyle.errorText}>Phone Number should be 10 digits.</text>: <text></text>}
+                { invalidPhoneNumber ? <text className={YourInfoStyle.errorText}>This field is required</text>: <text></text>}
                 <input required minLength={10} onChange={onPhoneNumberChange} onBlur={onPhoneNumberChange} value={personalInfoData.phoneNumber} type="number" placeholder="e.g. +1 234 567 890" 
                 className={`form-control ${invalidPhoneNumber? YourInfoStyle.error :''}`} id="exampleInputPhoneNumber" aria-describedby="phoneNumberHelp"/>
             </div>
