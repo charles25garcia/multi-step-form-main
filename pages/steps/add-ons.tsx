@@ -46,7 +46,7 @@ export default function AddOns(): JSX.Element {
 
     useEffect(() => {
         setAddOnsList(addOns);
-        dispatch(setStatusStep({ status: addOns.some(i => i.selected), step: nextStep?.id }));
+        dispatch(setStatusStep({ status: true, step: nextStep?.id }));
     }, [addOns]);
 
     return <>

@@ -17,7 +17,8 @@ export function enableNextStepOfPersonalInfo(
     personalInfo.name.trim() !== "" &&
     isValidEmail(personalInfo.email) &&
     personalInfo.email.trim() !== "" &&
-    personalInfo.phoneNumber.trim() !== "";
+    personalInfo.phoneNumber.trim() !== "" &&
+    personalInfo.phoneNumber.trim().length === 10;
 
   if (_nextStep) {
     _nextStep.enabled = nextStepStatus;

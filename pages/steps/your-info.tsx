@@ -18,6 +18,9 @@ import { StepHeader } from "@shared/common-components";
 // Types
 import { StepHeaderPropsType } from "@shared/types";
 
+// Utils
+import { isBlank, isValidEmail, isValidPhoneNumber } from "@shared/utils";
+
 
 export default function YourInfo(): JSX.Element {
     const dispatch = useDispatch();
@@ -29,6 +32,9 @@ export default function YourInfo(): JSX.Element {
         email: '',
         phoneNumber: ''
     });
+    const [ invalidName, setInvalidName ] = useState(false);
+    const [ invalidEmail, setInvalidEmail ] = useState(false);
+    const [ invalidPhoneNumber, setInvalidPhoneNumber ] = useState(false);
 
     const header: StepHeaderPropsType = {
         headerText:'Personal Info',
@@ -52,11 +58,15 @@ export default function YourInfo(): JSX.Element {
             name: inputValue.trim() === '' ? '' : inputValue
         });
 
+        setInvalidName(isBlank(inputValue));
+
         dispatch(setPersonalInfo(personalInfoData));
     } 
 
     const onEmailChange = (e: any) => {
         const inputValue = e.target.value;
+
+        setInvalidEmail(!isValidEmail(inputValue));
 
         setPersonalInfoData({
             ...personalInfoData,
@@ -69,6 +79,9 @@ export default function YourInfo(): JSX.Element {
 
     const onPhoneNumberChange = (e: any) => {
         const inputValue = e.target.value;
+
+        setInvalidPhoneNumber(!isValidPhoneNumber(inputValue));
+
         setPersonalInfoData({
             ...personalInfoData,
             phoneNumber: inputValue.trim() === '' ? '' : inputValue
@@ -84,20 +97,26 @@ export default function YourInfo(): JSX.Element {
 
             <div className="form-group">
                 <label htmlFor="exampleInputName">Name</label>
-                <input required onChange={onNameChange} onBlur={onNameChange} value={personalInfoData.name} type="text" placeholder="e.g. Stephen King" className="form-control" id="exampleInputName" aria-describedby="nameHelp"/>
+                { invalidName ? <text className={YourInfoStyle.errorText}>Name is Required.</text>: <text></text>}
+                <input required onChange={onNameChange} onBlur={onNameChange} value={personalInfoData.name} type="text" placeholder="e.g. Stephen King" 
+                className={`form-control ${invalidName? YourInfoStyle.error :''}`} id="exampleInputName" aria-describedby="nameHelp"/>
             </div>
             <br />
 
             <div className="form-group">
                 <label htmlFor="exampleInputEmail">Email Address</label>
-                <input required onChange={onEmailChange} onBlur={onEmailChange} value={personalInfoData.email} type="email" placeholder="e.g. stephenking@lorem.com" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp"/>
+                { invalidEmail ? <text className={YourInfoStyle.errorText}>Invalid Email.</text>: <text></text>}
+                <input required onChange={onEmailChange} onBlur={onEmailChange} value={personalInfoData.email} type="email" placeholder="e.g. stephenking@lorem.com" 
+                className={`form-control ${invalidEmail? YourInfoStyle.error :''}`} id="exampleInputEmail" aria-describedby="emailHelp"/>
             </div>
 
             <br />
 
             <div className="form-group">
                 <label htmlFor="exampleInputPhoneNumber">Phone Number</label>
-                <input required onChange={onPhoneNumberChange} onBlur={onPhoneNumberChange} value={personalInfoData.phoneNumber} type="number" placeholder="e.g. +1 234 567 890" className="form-control" id="exampleInputPhoneNumber" aria-describedby="phoneNumberHelp"/>
+                { invalidPhoneNumber ? <text className={YourInfoStyle.errorText}>Phone Number should be 10 digits.</text>: <text></text>}
+                <input required minLength={10} onChange={onPhoneNumberChange} onBlur={onPhoneNumberChange} value={personalInfoData.phoneNumber} type="number" placeholder="e.g. +1 234 567 890" 
+                className={`form-control ${invalidPhoneNumber? YourInfoStyle.error :''}`} id="exampleInputPhoneNumber" aria-describedby="phoneNumberHelp"/>
             </div>
         </div>
     </>
