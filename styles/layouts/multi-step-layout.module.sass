@@ -1,0 +1,35 @@
+.multiStepLayout
+    height: 100%
+    padding: 5rem 0rem
+    width: 76rem !important
+    .customCard
+        padding: 20px 34px
+        height: 42rem
+        background-color: white
+        border-radius: 20px
+        box-shadow: 0px 0px 10px 10px #00000005
+        form
+            height: 100%
+        .left
+            background-image: url('../../assets/images/bg-sidebar-desktop.svg')
+            background-repeat: no-repeat
+            background-size: contain
+            border-radius: 12px
+            padding: 50px 32px
+        .right
+            padding: 0px 4rem
+            color: hsl(213, 96%, 18%)
+            button.goBack
+                color: hsl(231, 11%, 63%)
+                border: none
+                &:hover
+                    color: #676767
+            .nextStep
+                background-color: hsl(213, 96%, 18%)
+                &:hover
+                    background-color: #214374
+            .nextStep, .confirm
+                border: none
+                padding: 12px 24px
+            .confirm
+                background-color: hsl(243, 100%, 62%)
