@@ -48,7 +48,7 @@ export default function SelectPlan(): JSX.Element {
     }, [])
 
     const onClickPlanCard = (plan: PlanCardType) => {
-        dispatch(setPlan(plan));
+        dispatch(setPlan({ ...plan,  type: toggle ? PlanTypeEnum.YEARLY: PlanTypeEnum.MONTHLY}));
     }
 
     const handleChange = () =>{
